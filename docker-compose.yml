@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  banking-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: banking-oncall-agent
+    restart: unless-stopped
+    environment:
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_APP_TOKEN=${SLACK_APP_TOKEN}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - KNOWLEDGE_BASE_PATH=${KNOWLEDGE_BASE_PATH:-../banking-oncall}
+      - PORT=${PORT:-8080}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+    volumes:
+      # Mount the banking-oncall repository
+      - ../banking-oncall:/banking-oncall:ro
+      # Mount logs directory
+      - ./logs:/home/banking-agent/logs
+    ports:
+      - "${PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "pgrep", "banking-agent"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Add a reverse proxy for HTTPS
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: banking-agent-proxy
+  #   ports:
+  #     - "443:443"
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./ssl:/etc/ssl:ro
+  #   depends_on:
+  #     - banking-agent
+
+networks:
+  default:
+    name: banking-oncall-network
