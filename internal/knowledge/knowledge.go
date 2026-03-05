@@ -9,8 +9,6 @@ import (
 	"strings"
 
 	"banking-oncall-agent/pkg/models"
-
-	"gopkg.in/yaml.v3"
 )
 
 // KnowledgeBase manages the banking-oncall documentation

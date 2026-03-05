@@ -1,14 +1,24 @@
-.PHONY: build run test clean docker-build docker-run help
+.PHONY: build run test clean docker-build docker-run mcp-build mcp-run help
 
-# Build the application
+# Build the Slack bot application
 build:
 	@echo "Building banking-oncall-agent..."
 	go build -o bin/banking-agent cmd/bot/main.go
 
-# Run the application locally
+# Build the MCP server
+mcp-build:
+	@echo "Building banking-oncall MCP server..."
+	go build -o bin/banking-mcp-server cmd/mcp-server/main.go
+
+# Run the Slack bot application locally
 run: build
 	@echo "Starting banking-oncall-agent..."
 	./bin/banking-agent
+
+# Run the MCP server
+mcp-run: mcp-build
+	@echo "Starting banking-oncall MCP server..."
+	./bin/banking-mcp-server
 
 # Run tests
 test:

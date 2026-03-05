@@ -6,7 +6,6 @@ require (
 	github.com/anthropics/anthropic-sdk-go v0.2.0-alpha.4
 	github.com/slack-go/slack v0.12.3
 	github.com/joho/godotenv v1.5.1
-	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
