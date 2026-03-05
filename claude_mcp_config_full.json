@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "banking-oncall-agent": {
+      "command": "/Users/richadubey/banking-oncall-agent/banking-oncall-agent/bin/banking-mcp-server",
+      "cwd": "/Users/richadubey/banking-oncall-agent/banking-oncall-agent",
+      "env": {
+        "KNOWLEDGE_BASE_PATH": "/Users/richadubey/banking-oncall-agent/banking-oncall"
+      }
+    },
+    "pagerduty": {
+      "command": "npx",
+      "args": ["-y", "@pagerduty/mcp-server"],
+      "env": {
+        "PAGERDUTY_API_TOKEN": "your-pagerduty-api-token-here",
+        "PAGERDUTY_USER_EMAIL": "your-email@company.com"
+      }
+    },
+    "atlassian-jira": {
+      "command": "npx",
+      "args": ["-y", "@sooperset/mcp-atlassian"],
+      "env": {
+        "ATLASSIAN_URL": "https://your-company.atlassian.net",
+        "ATLASSIAN_EMAIL": "your-email@company.com",
+        "ATLASSIAN_API_TOKEN": "your-atlassian-api-token-here"
+      }
+    },
+    "datadog": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-datadog"],
+      "env": {
+        "DATADOG_API_KEY": "your-datadog-api-key-here",
+        "DATADOG_APP_KEY": "your-datadog-app-key-here",
+        "DATADOG_SITE": "datadoghq.com"
+      }
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "your-sentry-auth-token-here",
+        "SENTRY_ORG": "your-sentry-org-slug"
+      }
+    },
+    "presidio": {
+      "command": "npx",
+      "args": ["-y", "@presidio-oss/specifai-mcp-server"],
+      "env": {
+        "PRESIDIO_API_KEY": "your-presidio-api-key-if-needed"
+      }
+    }
+  }
+}
