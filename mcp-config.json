@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "banking-oncall-agent": {
+      "command": "go",
+      "args": ["run", "cmd/mcp-server/main.go"],
+      "env": {
+        "KNOWLEDGE_BASE_PATH": "../banking-oncall"
+      }
+    }
+  }
+}
